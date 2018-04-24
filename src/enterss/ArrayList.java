@@ -57,12 +57,14 @@ public class ArrayList<E> implements List<E>, RandomAccess {
     }
 
     private boolean contains(Object target, int index) {
-        if (data[index] == null && target == null){
+        if (index == data.length){
+            return false;
+        } else if (data[index] == null && target == null){
             return true;
         } else if (data[index] == null && target != null) {
             return contains(target, ++index);
         }else {
-            return index != (data.length - 1) && (data[index].equals(target) || contains(target,++index));
+            return index < data.length && (data[index].equals(target) || contains(target,++index));
         }
     }
 
@@ -85,6 +87,13 @@ public class ArrayList<E> implements List<E>, RandomAccess {
     private int indexOf(Object target, int index ){
         if (index == data.length){
             return -1;
+        }
+        if (data[index] == null) {
+            if (target == null){
+                return index;
+            } else {
+                return indexOf(target, ++index);
+            }
         }
         if (data[index].equals(target)) {
             return index;

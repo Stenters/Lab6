@@ -100,7 +100,11 @@ public class LinkedList<E> implements List<E> {
     }
 
     private boolean contains(Object target, Node<E> current) {
-        return current != null && (current == target || contains(target,current.next));
+        if (target == null){
+            return current != null && (current.value == null || contains(target,current.next));
+        } else {
+            return current != null && (target.equals(current.value) || contains(target,current.next));
+        }
     }
 
     /**
@@ -116,17 +120,23 @@ public class LinkedList<E> implements List<E> {
      */
     @Override
     public int indexOf(Object target) {
-        return indexOf(target,head);
+        return indexOf(target,head,0);
     }
 
-    private int indexOf(Object target, Node<E> current) {
+    private int indexOf(Object target, Node<E> current, int index) {
         if (current == null){
             return -1;
+        }else if (current.value == null) {
+            if (target == null){
+                return index;
+            } else {
+                return indexOf(target, current.next, ++index);
+            }
         }
-        if (current.equals(target)){
-            return 0;
+        if (current.value.equals(target)){
+            return index;
         } else {
-            return 1 + indexOf(target, current.next);
+            return indexOf(target, current.next, ++index);
         }
     }
 
@@ -165,6 +175,9 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public boolean add(E element) {
+        if (head == null){
+            head = new Node<>(element);
+        }
         Node walker = head;
         while (walker.next != null){
             walker = walker.next;
@@ -175,7 +188,13 @@ public class LinkedList<E> implements List<E> {
 
     @Override
     public boolean remove(Object target) {
-        throw new UnsupportedOperationException("Not implemented");
+        int index = indexOf(target);
+        Node current = head;
+        for (int i = 0; i < index - 1; i++){
+            current = current.next;
+        }
+        current.next = current.next.next;
+        return true;
     }
 
     @Override

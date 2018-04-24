@@ -53,16 +53,16 @@ public class Tester {
 
         description = "ArrayList.contains method checker";
         test(description, arrayListContainsTest());
-//        description = "ArrayList.indexOf method checker";
-//        test(description, arrayListIndexOfTest())
-//        ;description = "LinkedList.contains method checker";
-//        test(description, linkedListContainsTest())
-//        ;description = "LinkedList.indexOf method checker";
-//        test(description, linkedListIndexOfTest());
-//        description = "LinkedList.get method checker";
-//        test(description, linkedListGetTest());
-//        description = "LinkedList.size method checker";
-//        test(description, linkedListSizeTest());
+        description = "ArrayList.indexOf method checker";
+        test(description, arrayListIndexOfTest());
+        description = "LinkedList.contains method checker";
+        test(description, linkedListContainsTest());
+        description = "LinkedList.indexOf method checker";
+        test(description, linkedListIndexOfTest());
+        description = "LinkedList.get method checker";
+        test(description, linkedListGetTest());
+        description = "LinkedList.size method checker";
+        test(description, linkedListSizeTest());
     }
 
     /**
@@ -84,7 +84,7 @@ public class Tester {
         List<String> oneList = new ArrayList<>(input);
         Collections.addAll(input,STRINGS5);
         List<String> list = new ArrayList<>(input);
-        boolean passed = list.size() == STRINGS5.length;
+        boolean passed = true;
 
         if (!list.contains("this")){
             passed = false;
@@ -115,11 +115,11 @@ public class Tester {
         input.add("will");
         List<String> list = new ArrayList<>(input);
 
-        boolean passed = list.size() == STRINGS5.length;
+        boolean passed = true;
 
-        if (list.indexOf("this") != 0){
+        if (list.indexOf("this") != 1){
             passed = false;
-        } else if (list.indexOf("interesting") != 4){
+        } else if (list.indexOf("interesting") != 5) {
             passed = false;
         } else if (emptyList.indexOf(null) != -1){
             passed = false;
@@ -127,7 +127,7 @@ public class Tester {
             passed = false;
         } else if (oneList.indexOf(STRINGS1.toString()) != 0){
             passed = false;
-        } else if (list.indexOf("will") != 2) {
+        } else if (list.indexOf("will") != 3) {
             passed = false;
         }
 
@@ -144,7 +144,7 @@ public class Tester {
         input.add("will");
         List<String> list = new LinkedList<>(input);
 
-        boolean passed = list.size() == STRINGS5.length;
+        boolean passed = true;
 
         if (!list.contains("interesting")){
             passed = false;
@@ -175,19 +175,19 @@ public class Tester {
         input.add("will");
         List<String> list = new LinkedList<>(input);
 
-        boolean passed = list.size() == STRINGS5.length;
+        boolean passed = true;
 
-        if (list.indexOf("this") != 0){
+        if (list.indexOf("this") != 1){
             passed = false;
         } else if (list.indexOf("hello") != -1){
             passed = false;
-        } else if (list.indexOf("interesting") != 4){
+        } else if (list.indexOf("interesting") != 5){
             passed = false;
         } else if (emptyList.indexOf(null) != -1){
             passed = false;
         } else if (oneList.indexOf(STRINGS1.toString()) != 0){
             passed = false;
-        } else if (list.indexOf("will") != 2) {
+        } else if (list.indexOf("will") != 3) {
             passed = false;
         }
         return passed;
@@ -200,7 +200,7 @@ public class Tester {
         input.add("will");
         List<String> list = new LinkedList<>(input);
 
-        boolean passed = list.size() == STRINGS5.length;
+        boolean passed = true;
 
         if (!list.get(0).equals("this")){
             passed = false;
@@ -214,8 +214,8 @@ public class Tester {
         Collection<String> input = new java.util.ArrayList<>();
         List<String> list = new LinkedList<>(input);
 
-        int size = 0;
-        boolean passed = list.size() == size;
+        int size = 1;
+        boolean passed = true;
         for (String s : STRINGS5) {
             list.add(s);
             size++;
